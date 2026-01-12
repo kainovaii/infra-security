@@ -9,8 +9,8 @@
 Vous ne pouvez plus vous connecter en SSH :
 
 ```bash
-ssh ubuntu@51.178.80.30
-# ssh: connect to host 51.178.80.30 port 22: Connection refused
+ssh user@192.168.23.30
+# ssh: connect to host 192.168.23.30 port 22: Connection refused
 ```
 
 **Causes fréquentes** :
@@ -20,38 +20,41 @@ ssh ubuntu@51.178.80.30
 
 ---
 
-## ✅ Solution : Mode Rescue OVH
+## ✅ Solution : Mode Rescue
 
 ### Étape 1 : Activer le mode rescue
 
-1. Connexion à l'**espace client OVH** : https://www.ovh.com/manager/
-2. Sélectionner le VPS : `vps-492e9cd2`
-3. Onglet **"Accueil"**
-4. Cliquer sur **"Redémarrer"** ou **"Netboot"**
-5. Sélectionner **"Rescue mode"** (rescue64-pro)
-6. Confirmer le redémarrage
-7. **Attendre 2-3 minutes**
+1. Connexion au **panel de votre hébergeur** (OVH, Scaleway, DigitalOcean, Hetzner, etc.)
+2. Sélectionner votre VPS
+3. Chercher l'option **"Rescue Mode"**, **"Recovery Mode"** ou **"Console"**
+4. Activer le mode rescue
+5. Confirmer le redémarrage
+6. **Attendre 2-3 minutes**
 
 ### Étape 2 : Récupérer les identifiants
 
-OVH envoie un email avec :
+Votre hébergeur envoie généralement un email avec :
 ```
 Login: root
 Password: XxXxXxXxXxXx
 ```
 
-Si vous n'avez pas reçu l'email, vous pouvez le redemander depuis l'espace client OVH.
+Si vous n'avez pas reçu l'email, vous pouvez le redemander depuis le panel d'administration.
 
 ### Étape 3 : Se connecter en mode rescue
 
-Depuis votre PC :
+**Option A - SSH** (si disponible) :
 
 ```bash
-ssh root@51.178.80.30
+ssh root@192.168.23.30
 # Entrer le mot de passe reçu par email
 ```
 
-**Note** : En mode rescue, vous utilisez le mot de passe, pas votre clé SSH.
+**Option B - Console web** (noVNC, KVM, Serial Console) :
+
+Utilisez la console web de votre hébergeur si SSH n'est pas disponible.
+
+**Note** : En mode rescue, vous utilisez généralement un mot de passe, pas votre clé SSH.
 
 ### Étape 4 : Passer en AZERTY (optionnel)
 
@@ -108,18 +111,17 @@ umount /mnt
 
 ### Étape 9 : Redémarrer en mode normal
 
-1. Retourner sur l'**espace client OVH**
-2. Sélectionner le VPS
-3. Onglet **"Accueil"**
-4. Cliquer sur **"Netboot"**
-5. Sélectionner **"Démarrer depuis le disque dur"**
-6. Confirmer le redémarrage
-7. **Attendre 2-3 minutes**
+1. Retourner sur le **panel de votre hébergeur**
+2. Sélectionner votre VPS
+3. Chercher l'option de **Netboot** ou **Boot Mode**
+4. Sélectionner **"Boot from hard disk"** ou **"Normal mode"**
+5. Confirmer le redémarrage
+6. **Attendre 2-3 minutes**
 
 ### Étape 10 : Reconnexion SSH
 
 ```bash
-ssh ubuntu@51.178.80.30
+ssh user@192.168.23.30
 # Vous devriez pouvoir vous connecter !
 ```
 
@@ -181,7 +183,7 @@ sudo ufw status verbose
 1. **TOUJOURS** autoriser le port SSH **AVANT** d'activer UFW
 2. **TOUJOURS** garder une session SSH ouverte lors de modifications firewall
 3. Si vous changez le port SSH (ex: 2222), pensez à l'autoriser dans UFW **avant** de recharger SSH
-4. Gardez les identifiants de la console noVNC d'OVH en cas d'urgence
+4. Gardez les identifiants de la console web de votre hébergeur en cas d'urgence
 
 ---
 
@@ -207,5 +209,4 @@ sudo ufw enable && sleep 60 && sudo ufw disable
 
 ---
 
-**Dernière mise à jour** : 12 janvier 2026  
-**Serveur** : vps-492e9cd2 (51.178.80.30)
+**Dernière mise à jour** : 12 janvier 2026
