@@ -55,7 +55,6 @@ ssh ubuntu@51.178.80.30
 **Configuration active** :
 ```
 22/tcp   ALLOW   (SSH)
-80/tcp   ALLOW   (HTTP)
 443/tcp  ALLOW   (HTTPS)
 ```
 
@@ -121,13 +120,6 @@ guardian.kainovaii.dev {
 ### 3. Guardian Bot
 - **URL** : https://guardian.kainovaii.dev
 - **Port** : 9393
-
----
-
-## 📊 Ressources système
-
-- **RAM** : ~158 MB utilisés (2%)
-- **CPU** : ~0.1%
 
 ---
 
